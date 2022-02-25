@@ -8,11 +8,12 @@ Library           Collections
 *** Variables ***
 
 *** Test Cases ***
-Do a GET Request and validate the response code and response body
+Idojaras_Budapest_smoke
     [Documentation]    This test case verifies that the response code of the GET Request should be 200,
-    ...    the response body contains the 'title' key with value as 'London',
+    ...    the response body contains the 'title' key with value as 'Budapest',
     ...    and the response body contains the key 'location_type'.
     [Tags]    Smoke
+    Set Loglevel    TRACE
     Create Session    mysession    https://www.metaweather.com    verify=true
     ${response}=    GET On Session    mysession    /api/location/search/    params=query=budapest
     Status Should Be    200    ${response}    #Check Status as 200
@@ -42,5 +43,16 @@ Do a POST Request and validate the response code, response body, and response he
     #Check the value of the header Content-Type
     ${getHeaderValue}=    Get From Dictionary    ${response.headers}    Content-Type
     Should be equal    ${getHeaderValue}    application/json; charset=utf-8
+
+Idojaras_Budapest_smoke_negativ
+    [Documentation]    This test case verifies that the response code of the GET Request should be 200,
+    ...    the response body contains the 'title' key with value as 'Budapest',
+    ...    and the response body contains the key 'location_type'.
+    [Tags]    Regression
+    Set Loglevel    TRACE
+    Create Session    mysession    https://www.metaweather.com    verify=true
+    ${error}=    Run Keyword And Expect Error    HTTPError: 403 Client Error: Forbidden for url: https://www.metaweather.com/api/location/search/    GET On Session    mysession    /api/location/search/
+    ${body}=    Convert To String    ${error}
+    Should Contain    ${body}    403    #Check Status as 403
 
 *** Keywords ***
