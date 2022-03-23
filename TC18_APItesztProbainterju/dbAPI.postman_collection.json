@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "ed0c9c92-6ae3-4ad4-895a-b3a4883e0cbc",
+		"name": "dbAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = JSON.parse(responseBody);\r",
+							"console.log(jsonData);\r",
+							"\r",
+							"pm.collectionVariables.set(\"locationId\", jsonData[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/freeplan/v1/location/:name",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"freeplan",
+						"v1",
+						"location",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "Budapest"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "arrivalBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = JSON.parse(responseBody);\r",
+							"console.log(jsonData);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/freeplan/v1/arrivalBoard/:locationId?date=2022-03-19",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"freeplan",
+						"v1",
+						"arrivalBoard",
+						":locationId"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-03-19"
+						}
+					],
+					"variable": [
+						{
+							"key": "locationId",
+							"value": "{{locationId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "locationId",
+			"value": ""
+		}
+	]
+}
