@@ -7,16 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 
 import java.time.Duration;
 
 public class BaseTests {
     private WebDriver driver;
     private WebDriverWait wait;
-    protected ProductPage productPage;
+    public ProductPage productPage;
 
     @BeforeClass
     public void SetUp() {
@@ -36,4 +34,5 @@ public class BaseTests {
     private void AcceptCookies() {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll")))).click();
     }
+
 }

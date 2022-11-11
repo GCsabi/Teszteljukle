@@ -2,9 +2,6 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage {
@@ -34,8 +31,9 @@ public class ProductPage {
         return driver.findElement(productDescription).getText();
     }
 
+
+
     public BasketPage ClickOnBasketButton() {
-        //wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(basketButton))).click();
         driver.findElement(basketButton).click();
         return new BasketPage(driver);
     }
